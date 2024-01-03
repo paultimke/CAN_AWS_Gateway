@@ -1,6 +1,7 @@
 set(SOURCES main.cpp application.cpp)
-set(DEPENDENCIES freertos esp-aws-iot esp_common client_mqtt wifi aws)
+set(DEPENDENCIES freertos wifi aws)
+set(INCLUDES "." "${PROJECT_DIR}/common_config")
 
 idf_component_register(SRCS ${SOURCES}
-                        INCLUDE_DIRS .
+                        INCLUDE_DIRS ${INCLUDES}
                         REQUIRES ${DEPENDENCIES})

@@ -3,6 +3,7 @@
 // --------------------------------------------------------
 #include "wifi.h"
 #include "wifi_credentials.h"
+#include "application.h"
 
 // Standard Includes
 #include <stdio.h>
@@ -55,6 +56,8 @@ static const uint16_t MAX_FAILURES = 10;
 static void event_handler(
         void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
+    main_app_event_t app_event;
+
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START)
     {
         ESP_LOGI(TAG, "Connecting to Access Point ...");
@@ -62,6 +65,7 @@ static void event_handler(
     }
     else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
     {
+        ESP_LOGI(TAG, "DISCONNECTED");
         if (retry_num < MAX_FAILURES)
         {
             ESP_LOGI(TAG, 
@@ -73,11 +77,19 @@ static void event_handler(
             esp_wifi_connect();
         }
     }
+    else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED)
+    {
+        ESP_LOGI(TAG, "Wifi STA Connected");
+    }
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP)
     {
         ip_event_got_ip_t* ipEvent = (ip_event_got_ip_t*) event_data;
         ESP_LOGI(TAG, "IP obtained: " IPSTR, IP2STR(&ipEvent->ip_info.ip));
         retry_num = 0;
+
+        // Notify the application that connection was successful 
+        app_event.Type = EVENT_WIFI_CONNECTED;
+        application_sendEventFromIsr(app_event);
     }
     else
     {
