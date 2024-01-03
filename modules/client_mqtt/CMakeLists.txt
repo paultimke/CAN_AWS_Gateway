@@ -1,5 +1,5 @@
-set(SOURCES main.cpp application.cpp)
-set(DEPENDENCIES freertos esp-aws-iot esp_common client_mqtt wifi aws)
+set(SOURCES client_mqtt.cpp)
+set(DEPENDENCIES freertos esp_common mqtt)
 
 idf_component_register(SRCS ${SOURCES}
                         INCLUDE_DIRS .
