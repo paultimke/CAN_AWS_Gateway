@@ -1,0 +1,3 @@
+[submodule "third_party/esp-aws-iot"]
+	path = third_party/esp-aws-iot
+	url = https://github.com/espressif/esp-aws-iot
