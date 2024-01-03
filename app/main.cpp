@@ -30,9 +30,9 @@ extern "C" void app_main(void)
     esp_log_level_set("CLIENT_MQTT", ESP_LOG_DEBUG);
     esp_log_level_set("WIFI", ESP_LOG_DEBUG);
 
-    /*wifi_init();
+    wifi_init();
     vTaskDelay(pdMS_TO_TICKS(10000));
-    mqtt_start_thread();
+    /*mqtt_start_thread();
     mqtt_subscribe("/topic/qos1");*/
 
     aws_iot_task_start();

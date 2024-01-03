@@ -171,8 +171,8 @@ void aws_iot_task(void *param) {
     }
 
     /* Wait for WiFI to show as connected */
-    xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT,
-                        false, true, portMAX_DELAY);
+    /*xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT,
+                        false, true, portMAX_DELAY);*/
 
     connectParams.keepAliveIntervalInSec = 10;
     connectParams.isCleanSession = true;
@@ -287,7 +287,7 @@ static void initialise_wifi(void)
 void aws_iot_task_start()
 {
     // Initialize NVS.
-    esp_err_t err = nvs_flash_init();
+    /*esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         err = nvs_flash_init();
@@ -295,6 +295,6 @@ void aws_iot_task_start()
     ESP_ERROR_CHECK( err );
 
     initialise_wifi();
-    vTaskDelay(10000/portTICK_PERIOD_MS);
+    vTaskDelay(10000/portTICK_PERIOD_MS);*/
     xTaskCreate(&aws_iot_task, "aws_iot_task", 9216, NULL, 5, NULL);
 }
