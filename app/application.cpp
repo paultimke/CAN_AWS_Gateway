@@ -10,7 +10,6 @@
 // --------------------------------------------------
 #include "application.h"
 #include "rtos_config.h"
-
 #include "aws_iot.h"
 
 #include "esp_log.h"
@@ -100,6 +99,15 @@ static void application_task_function(void* pvParameters)
                 ESP_LOGI(TAG, "WIFI Connection successful");
                 // Connect to AWS host as soon as Wifi is established
                 aws_iot_task_start(); 
+                break;
+
+            case EVENT_AWS_TOPIC_MSG:
+                // Serialize and convert AWS json message to a format appropiate
+                // to send to can device
+                break;
+
+            case EVENT_CAN_MSG:
+                // Deserialize and convert CAJ message to JSON and send to AWS
                 break;
 
             default:

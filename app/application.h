@@ -24,7 +24,8 @@ typedef enum
     EVENT_WIFI_DISCONNECTED,
     EVENT_AWS_CONNECTED,
     EVENT_AWS_DISCONNECTED,
-    EVENT_CAN_MESSAGE
+    EVENT_AWS_TOPIC_MSG,
+    EVENT_CAN_MSG
 } event_type_e;
 
 typedef struct
