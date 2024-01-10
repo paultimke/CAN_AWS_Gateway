@@ -8,6 +8,7 @@ set(EXTRA_COMPONENT_DIRS
     app 
     Credentials
     modules
+    modules/bsp
     third_party/esp-aws-iot
     $ENV{IDF_PATH}/examples/common_components/protocol_examples_common
 )

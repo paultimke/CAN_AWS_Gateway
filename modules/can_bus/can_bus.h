@@ -7,6 +7,11 @@
 #ifndef _CAN_H_
 #define _CAN_H_
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif // __cplusplus
+
 // --------------------------------------------------------
 // Includes
 // --------------------------------------------------------
@@ -23,7 +28,7 @@ typedef MCP_CAN_frame CAN_frame_t;
 /// message
 /// @param None  
 /// @return true if successful, false otherwise 
-bool CAN_init(void);
+bool CAN_init();
 
 /// @brief Reads message from MCP2515 controller. Use this
 /// function when receiving an interrupt indicating a new 
@@ -31,5 +36,9 @@ bool CAN_init(void);
 /// @param frame Pointer to a CAN frame to place data
 /// @return true if successful, false otherwise 
 bool CAN_receive(CAN_frame_t* frame);
+
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 
 #endif // _CAN_H_

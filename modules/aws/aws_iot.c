@@ -78,6 +78,11 @@ static void disconnectCallbackHandler(AWS_IoT_Client *pClient, void *data)
     ESP_LOGW(TAG, "MQTT Disconnect");
     IoT_Error_t rc = FAILURE;
 
+    // Notify the application of disconnection
+    main_app_event_t event;
+    event.Type = EVENT_AWS_DISCONNECTED;
+    application_sendEvent(event);
+
     if(NULL == pClient) 
     {
         return;
@@ -167,6 +172,11 @@ static void aws_iot_task(void *param)
         ESP_LOGE(TAG, "Error subscribing : %d ", rc);
         abort();
     }
+
+    // Notify the application that connection was successful
+    main_app_event_t event;
+    event.Type = EVENT_AWS_CONNECTED;
+    application_sendEvent(event);
 
     while((NETWORK_ATTEMPTING_RECONNECT == rc || NETWORK_RECONNECTED == rc || SUCCESS == rc)) {
 

@@ -7,7 +7,7 @@
 // --------------------------------------------------------
 // Includes
 // --------------------------------------------------------
-#include "can.h"
+#include "can_bus.h"
 #include "spi.h"
 #include "application.h"
 #include "bsp_config.h"
@@ -46,7 +46,7 @@ static void GPIO_init(void)
 // --------------------------------------------------------
 // Public functions
 // --------------------------------------------------------
-bool CAN_init(void)
+bool CAN_init()
 {
     GPIO_init();
     SPI_init();
@@ -83,7 +83,7 @@ bool CAN_init(void)
 bool CAN_receive(CAN_frame_t* frame)
 {
     MCP_ERROR_t ret = ERROR_FAIL;
-    ret = MCP2515_readMessage(RXB0, &frame);
+    ret = MCP2515_readMessage(RXB0, frame);
 
     return (ERROR_OK == ret);
 }
