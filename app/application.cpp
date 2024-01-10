@@ -11,6 +11,7 @@
 #include "application.h"
 #include "rtos_config.h"
 #include "aws_iot.h"
+#include "can.h"
 
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
@@ -107,8 +108,17 @@ static void application_task_function(void* pvParameters)
                 break;
 
             case EVENT_CAN_MSG:
+            {
                 // Deserialize and convert CAJ message to JSON and send to AWS
+                CAN_frame frame;
+                if (CAN_receive(&frame))
+                {
+                    ESP_LOGI(TAG, "[CAN MSG] ID=%d DLC=%d", frame.can_id, frame.can_dlc);
+                    ESP_LOG_BUFFER_HEX(TAG, frame.data, frame.can_dlc);
+                }
+
                 break;
+            }
 
             default:
                 break;
