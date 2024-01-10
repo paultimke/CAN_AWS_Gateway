@@ -4,7 +4,12 @@ This simple project listens for messages of devices in a CAN bus. When a message
 
 To run the project, you need to have an AWS account and configure the IoT "Thing" yourself to get the necessary certificates and keys. When creating the policy, make sure to set all necessary MQTT permissions to be able to publish and subscribe to topics. The topics used by the application are `AWS/esp32_pub` and `AWS/esp32_sub`.
 
-### Configure the project
+### Install
+To install the application simply run the following commands on the desired installation directory:
+`git clone https://github.com/paultimke/CAN_AWS_Gateway.git`
+`git submodule update --init --recursive`
+
+### Configure credentials
 **TODO:** For now, the AWS MQTT endpoint as well as the wifi SSID and password are hardcoded into a local file on my machine. In the future, I plan to integrate a serial CLI to enable provisioning via UART.
 
 With the current setup, the steps to configure the project with all necessary credentials are:
