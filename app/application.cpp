@@ -83,6 +83,7 @@ static void application_task_function(void* pvParameters)
     ESP_LOGI(TAG, "Main application thread running.");
 
     // Initialize modules needed by the application
+    wifi_init();
     if (!CAN_init())
     {
         ESP_LOGE(TAG, "Could not initialize CAN module");
