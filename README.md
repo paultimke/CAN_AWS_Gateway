@@ -6,8 +6,8 @@ To run the project, you need to have an AWS account and configure the IoT "Thing
 
 ### Install
 To install the application simply run the following commands on the desired installation directory:
-`git clone https://github.com/paultimke/CAN_AWS_Gateway.git`
-`git submodule update --init --recursive`
+* `git clone https://github.com/paultimke/CAN_AWS_Gateway.git`
+* `git submodule update --init --recursive`
 
 ### Configure credentials
 **TODO:** For now, the AWS MQTT endpoint as well as the wifi SSID and password are hardcoded into a local file on my machine. In the future, I plan to integrate a serial CLI to enable provisioning via UART.
